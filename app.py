@@ -66,7 +66,7 @@ if uploaded_file:
         **Grades:**
         - `G1`, `G2`: First and second period grades (0-20)
         - `G3`: Final grade (Target for prediction)
-        
+
         **Metrics:**
         - `Accuracy`: Overall correctness of prediction
         - `Precision`: Correctness of positive predictions
@@ -110,6 +110,12 @@ if uploaded_file:
         col1.metric("📉 Mean Absolute Error", f"{mae:.2f}")
         col2.metric("📏 RMSE", f"{rmse:.2f}")
         col3.metric("📊 R² Score", f"{r2:.2f}")
+
+        st.subheader("🧮 Grade Prediction Results")
+        results_df = X_test.copy()
+        results_df['Actual G3'] = y_test
+        results_df['Predicted G3'] = y_pred.round(2)
+        st.dataframe(results_df)
 
         # Classification: Pass/Fail
         st.subheader("✅ Classification: Predicting Pass/Fail")
